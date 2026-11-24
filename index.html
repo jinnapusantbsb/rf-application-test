@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <style>
+    :root{--forest:#214e43;--deep:#123d35;--green:#285e43;--gold:#f3d58e;--sky:#d9eef8;--paper:#eaf5fa;--cream:#ffffff;--card:#f4fafe;--line:#c2dbe6;--ink:#263e45;--muted:#596f77;--white:#fffdf8;--red:#b42318;--shadow:0 8px 24px rgba(25,57,46,.12)}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 Tahoma,Arial,"Noto Sans Thai",sans-serif}
+    header{background:#edf2e9;padding:14px 5%;color:var(--forest);font-weight:800;letter-spacing:.04em;border-bottom:1px solid #c8d7ca}
+    .hero{position:relative;isolation:isolate;overflow:hidden;min-height:clamp(320px,42vw,560px);padding:140px 6% 48px;color:white;background-color:#76bde0;background-image:linear-gradient(90deg,rgba(12,67,96,.30),rgba(12,67,96,.04)),url("assets/hero.jpg");background-size:cover;background-position:center top;border:0;border-radius:0;box-shadow:none}
+    .hero:after{content:"";position:absolute;z-index:-1;width:270px;height:270px;right:-90px;bottom:-170px;border:1px solid #ffffff45;border-radius:50%}
+    .eyebrow{display:inline-block;padding:7px 18px;border-radius:30px;background:var(--gold);color:#203f32;font-size:12px;letter-spacing:0;font-weight:800}.hero h1{margin:9px 0 10px;font-size:clamp(28px,5vw,44px);line-height:1.3;text-shadow:0 2px 6px #0008}.hero p{margin:4px 0;color:#f2f4ed;text-shadow:0 2px 5px #0008;font-size:14px}.position{display:none}
+    .layout{max-width:1250px;margin:28px auto 54px;padding:0 20px;display:grid;grid-template-columns:310px minmax(0,1fr);gap:24px;align-items:start}
+    .error-layout{display:block;max-width:900px}.main{min-width:0}
+    .sidebar{position:sticky;top:18px;padding:25px 23px;background:var(--forest);color:#f7f5e9;border:2px solid #c8ad69;border-radius:16px;box-shadow:var(--shadow)}
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:12px}.mark{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#d5b761,#f3d58e);color:#203f32;font-weight:900;letter-spacing:.04em}.brand strong{font-size:14px}.brand small{display:block;color:#e2e9dc;font-size:11px}.side-intro{font-size:12px;color:#e2e9dc;margin:8px 0 18px;padding-bottom:16px;border-bottom:1px solid #668578}
+    .side-details{border-top:1px solid #668578}.side-details:last-child{border-bottom:1px solid #668578}.side-details summary{list-style:none;cursor:pointer;padding:12px 1px;color:#ffe09a;font-size:15px;font-weight:800}.side-details summary::-webkit-details-marker{display:none}.side-details summary:before{content:"▸";display:inline-block;margin-right:9px;transition:transform .2s}.side-details[open] summary:before{transform:rotate(90deg)}.side-details ul{margin:0 0 14px;padding-left:20px;color:#f7f5e9;font-size:12px}.side-details li{margin:7px 0;padding-left:2px}.side-label{font-weight:800;font-size:12px;margin:16px 0 7px}.download{display:block;margin:18px 0;padding:12px;text-align:center;border-radius:9px;background:var(--gold);color:#203f32;text-decoration:none;font-size:13px;font-weight:800}.download:hover{background:#ffe6a6}.side-contact{font-size:12px}.side-contact a{display:block;color:#fff;margin:6px 0;text-decoration:none;overflow-wrap:anywhere}.side-contact a:hover{text-decoration:underline}.online-note{font-size:11px;color:#fff2ce;margin-top:14px;padding:12px;border-left:4px solid var(--gold);border-radius:6px;background:#163d33}
+    .notice-box{margin:0 0 18px;padding:16px 18px;border:2px solid #b99b45;border-left-width:7px;border-radius:12px;background:#f5e9bd;color:#53441c;font-size:13px}
+    .form-card{padding:22px 24px;background:var(--cream);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+    .step-panel{display:block;margin:0 0 24px;padding-bottom:20px;border-bottom:1px solid #cbd6c4}@keyframes fade-in{from{opacity:.55;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}.step-title{margin:0 0 12px;padding:11px 14px;border-radius:8px;background:#e3ebdd;color:#234f3d;font-size:21px}.step-desc{margin:4px 0 20px;color:var(--muted);font-size:12px}
+    .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.field{margin:0 0 16px}.field.full{grid-column:1/-1}.field label,.file-label{display:block;margin-bottom:6px;font-weight:800;font-size:13px}.req{color:var(--red)}
+    input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{width:100%;min-height:46px;padding:10px 12px;border:2px solid #829e87;border-radius:9px;background:#f8fcfe;color:#243d30;font:inherit;font-size:13px}select{background:#e7f4f8}textarea{min-height:100px;resize:vertical}input:focus,select:focus,textarea:focus{outline:3px solid #c2d7b7;border-color:#356b49}small.help{display:block;margin-top:5px;color:var(--muted);font-size:11px}
+    .file-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.filebox{padding:14px;border:1px solid #a7bca4;border-radius:10px;background:#edf7fb}.filebox input{display:block;width:100%;padding:8px;border:1px dashed #829e87;border-radius:8px;background:#fbfdfe;font:inherit;font-size:12px}
+    .review-panel{margin-top:18px;padding:16px;border:1px solid var(--line);border-radius:12px;background:#f4fafe}.review-panel[hidden]{display:none!important}.review-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.review-item{padding:12px;border:1px solid var(--line);border-radius:10px;background:#fffdf8;min-width:0}.review-label{display:block;color:var(--muted);font-size:11px;font-weight:800;margin-bottom:3px}.review-value{display:block;overflow-wrap:anywhere;font-size:13px;white-space:pre-wrap}.privacy{margin-top:20px;padding:15px;border:1px solid #e5eadd;border-radius:11px;background:#f5f7f2;font-size:12px}.privacy a{color:var(--forest);font-weight:800}.check{display:flex;align-items:flex-start;gap:9px;margin-top:10px}.check input{margin-top:6px;accent-color:var(--forest)}
+    .actions{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:24px;padding-top:17px;border-top:1px solid #cbd6c4}.button{padding:11px 18px;border:0;border-radius:9px;background:var(--green);color:#fffdf3;font:inherit;font-size:13px;font-weight:800;cursor:pointer}.button:hover{background:#17452f}.button.secondary{border:1px solid #bdd0c7;background:#dce6d5;color:#284d36}.button:disabled{opacity:.6;cursor:default}.notice{display:none;margin-top:14px;padding:12px 14px;border-radius:9px;font-size:13px;white-space:pre-wrap}.notice.error{display:block;background:#fce5dc;color:#8b251b}.notice.success{display:block;background:#dcefdc;color:#185b36}.notice.info{display:block;background:#f5e9bd;color:#53441c}.hidden{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.footer{text-align:center;padding:20px;color:var(--muted);font-size:11px}
+    @media(max-width:850px){.layout{grid-template-columns:1fr;margin-top:18px}.sidebar{position:static;order:2}.main{order:1}.download{max-width:340px}.side-contact{display:flex;gap:8px 16px;flex-wrap:wrap}.side-contact .side-label{width:100%;margin-bottom:0}.hero{min-height:320px;padding-top:104px;background-position:left top}}
+    @media(max-width:560px){header{padding:12px 16px;font-size:13px}.hero{min-height:280px;padding:96px 20px 30px;background-position:left top}.hero h1{font-size:28px}.layout{width:100%;padding:0 12px;margin:14px auto 34px;gap:14px}.form-card{padding:16px;border-radius:14px}.field-grid,.file-grid,.review-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.actions{align-items:flex-end;flex-wrap:wrap}.button{padding:10px 13px}.actions .button{min-width:110px}.sidebar{padding:18px}.notice-box{font-size:12px}}
+  </style>
+</head>
+<body>
+<header>SIRIRAJ · RESEARCH CAREERS</header>
+<section class="hero">
+  <div class="eyebrow">เปิดรับสมัคร · 1 อัตรา</div>
+  <h1>รับสมัครแพทย์ช่วยวิจัย</h1>
+  <p>สาขาวิชาศัลยศาสตร์ตกแต่ง ภาควิชาศัลยศาสตร์</p>
+  <p>คณะแพทยศาสตร์ศิริราชพยาบาล</p>
+</section>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand"><div class="mark">RF</div><div><strong>RF Plastic Siriraj</strong><small>สมัครแพทย์ช่วยวิจัย</small></div></div>
+    <p class="side-intro">ร่วมงานกับทีมศิริราช<br>ตำแหน่งแพทย์ช่วยวิจัย · 1 อัตรา<br>คณะแพทยศาสตร์ศิริราชพยาบาล</p>
+    <nav class="side-nav" aria-label="รายละเอียดตำแหน่ง">
+      <details class="side-details" id="qualifications" open><summary>คุณสมบัติผู้สมัครแพทย์ช่วยวิจัย</summary><ul>
+        <li>สำเร็จการศึกษาแพทยศาสตรบัณฑิต และได้รับใบอนุญาตประกอบวิชาชีพเวชกรรม</li>
+        <li>เป็นแพทย์เพิ่มพูนทักษะอย่างน้อย 1 ปี ในวันที่เริ่มปฏิบัติงานที่สาขาศัลยศาสตร์ตกแต่ง</li>
+        <li>มีความสามารถในการใช้ภาษาไทย และภาษาอังกฤษ อ่าน เขียน ได้เป็นอย่างดี</li>
+        <li>มีทักษะในการใช้โปรแกรม Microsoft Office (Word, Excel, PowerPoint)</li>
+        <li>มีทักษะในการใช้โปรแกรมทางสถิติในการวิเคราะห์ข้อมูล เช่น SPSS</li>
+        <li>มีใจรักและมีความสนใจในด้านงานวิจัยของสาขาศัลยศาสตร์ตกแต่ง</li>
+        <li>มีทักษะในการเขียนโปรแกรมคอมพิวเตอร์และพื้นฐานทางด้านการวิจัยทางคลินิก จะได้รับการพิจารณาเป็นพิเศษ</li>
+      </ul></details>
+      <details class="side-details" id="responsibilities" open><summary>หน้าที่และความรับผิดชอบ</summary><ul>
+        <li>ดูแลและจัดข้อมูลวิจัยของสาขาศัลยศาสตร์ตกแต่ง</li>
+        <li>นำเสนอผลงานในงานประชุมวิชาการ</li>
+        <li>จัดทำรายงานการวิจัย Manuscript เพื่อตีพิมพ์ในวารสารด้านการแพทย์</li>
+        <li>บันทึกข้อมูลของผู้ป่วยในโครงการวิจัย</li>
+        <li>ให้ความรู้อาสาสมัครเกี่ยวกับโครงการวิจัย</li>
+        <li>ประสานงานกับบุคลากรภายในทีมวิจัย</li>
+        <li>งานอื่น ๆที่ได้รับมอบหมาย</li>
+      </ul></details>
+    </nav>
+    <a class="download" href="https://drive.google.com/drive/folders/1p_eu3hMrWsReX0moosJAHpmeLDnLb6WO?usp=drive_link" target="_blank" rel="noopener">ดาวน์โหลดใบสมัครและเอกสาร</a>
+    <div class="side-contact"><div class="side-label">สอบถามเพิ่มเติม</div><a href="mailto:jinnapusant.bsb@gmail.com">jinnapusant.bsb@gmail.com</a><a href="tel:024198002">02-4198002</a><a href="tel:024199191">02-4199191 (ในเวลาราชการ)</a></div>
+    <p class="online-note">กรุณาสมัครผ่านแบบฟอร์มออนไลน์เท่านั้น</p>
+  </aside>
+
+  <main class="main">
+    <div class="notice-box">กรุณากรอกข้อมูลให้ตรงกับเอกสารสมัครงาน และแนบไฟล์ให้ครบถ้วน ขนาดไม่เกิน 4 MB ต่อไฟล์ (รวมไม่เกิน 16 MB)</div>
+
+    <form id="applicationForm" class="form-card" data-privacy-version="" novalidate>
+<section class="step-panel">
+        <h2 class="step-title">1. ข้อมูลส่วนตัว</h2>
+        <p class="step-desc">กรอกข้อมูลให้ตรงกับเอกสารสมัครงาน</p>
+        <div class="field-grid">
+          <div class="field full"><label for="fullName">ชื่อ–นามสกุล <span class="req">*</span></label><input id="fullName" name="fullName" type="text" maxlength="120" required autocomplete="name"></div>
+          <div class="field"><label for="dob">วันเดือนปีเกิด <span class="req">*</span></label><input id="dob" name="dob" type="date" required></div>
+          <div class="field"><label for="gender">เพศ <span class="req">*</span></label><select id="gender" name="gender" required><option value="">เลือกคำตอบ</option><option>หญิง</option><option>ชาย</option><option>ไม่ประสงค์ระบุ</option></select></div>
+          <div class="field"><label for="phone">เบอร์โทรศัพท์ <span class="req">*</span></label><input id="phone" name="phone" type="tel" maxlength="40" required autocomplete="tel"></div>
+          <div class="field"><label for="email">อีเมล <span class="req">*</span></label><input id="email" name="email" type="email" maxlength="160" required autocomplete="email"></div>
+          <div class="field full"><label for="currentAddress">ที่อยู่ปัจจุบัน <span class="req">*</span></label><textarea id="currentAddress" name="currentAddress" maxlength="1000" required autocomplete="street-address"></textarea></div>
+        </div>
+        
+      </section>
+
+      <section class="step-panel">
+        <h2 class="step-title">2. ข้อมูลการศึกษา</h2>
+        <p class="step-desc">กรอกวุฒิและสถาบันที่สำเร็จการศึกษา</p>
+        <div class="field-grid">
+          <div class="field"><label for="education">ระดับการศึกษา <span class="req">*</span></label><input id="education" name="education" type="text" maxlength="120" required placeholder="เช่น แพทยศาสตรบัณฑิต"></div>
+          <div class="field"><label for="institution">มหาวิทยาลัย/สถาบัน <span class="req">*</span></label><input id="institution" name="institution" type="text" maxlength="200" required></div>
+          <div class="field full"><label for="licenseNumber">เลขที่ใบอนุญาตประกอบวิชาชีพเวชกรรม <span class="req">*</span></label><input id="licenseNumber" name="licenseNumber" type="text" maxlength="40" required autocomplete="off"></div>
+        </div>
+        
+      </section>
+
+      <section class="step-panel">
+        <h2 class="step-title">3. ประสบการณ์และทักษะ</h2>
+        <p class="step-desc">ระบุประสบการณ์และทักษะที่เกี่ยวข้องกับงานวิจัย</p>
+        <div class="field-grid">
+          <div class="field full"><label for="researchExperience">ประสบการณ์ทำวิจัยหรือวิจัยทางคลินิก</label><textarea id="researchExperience" name="researchExperience" maxlength="2000" placeholder="ระบุหัวข้อวิจัย บทบาท หรือประสบการณ์ที่เกี่ยวข้อง (ถ้ามี)"></textarea><small class="help">ไม่บังคับกรอก</small></div>
+          <div class="field full"><label for="relatedSkills">ทักษะที่เกี่ยวข้อง <span class="req">*</span></label><textarea id="relatedSkills" name="relatedSkills" maxlength="1000" required placeholder="เช่น SPSS, Excel, ภาษาอังกฤษ หรือโปรแกรมสถิติอื่น ๆ"></textarea></div>
+        </div>
+        
+      </section>
+
+      <section class="step-panel">
+        <h2 class="step-title">4. เอกสารประกอบการสมัคร</h2>
+        <p class="step-desc">ไฟล์ที่มีเครื่องหมาย <span class="req">*</span> จำเป็นต้องแนบ รองรับชนิดไฟล์ตามที่ระบุ</p>
+        <div class="file-grid">
+          <div class="filebox"><label class="file-label" for="photo">รูปถ่าย 1 นิ้ว <span class="req">*</span></label><input id="photo" type="file" accept="image/jpeg,image/png" required><small class="help">JPG หรือ PNG</small></div>
+          <div class="filebox"><label class="file-label" for="cv">ประวัติส่วนตัว (CV) <span class="req">*</span></label><input id="cv" type="file" accept="application/pdf" required><small class="help">PDF</small></div>
+          <div class="filebox"><label class="file-label" for="idCard">สำเนาบัตรประชาชน <span class="req">*</span></label><input id="idCard" type="file" accept="application/pdf,image/jpeg,image/png" required><small class="help">PDF, JPG หรือ PNG</small></div>
+          <div class="filebox"><label class="file-label" for="medicalLicense">สำเนาใบอนุญาตประกอบวิชาชีพเวชกรรม <span class="req">*</span></label><input id="medicalLicense" type="file" accept="application/pdf,image/jpeg,image/png" required><small class="help">PDF, JPG หรือ PNG</small></div>
+          <div class="filebox"><label class="file-label" for="degree">สำเนาใบปริญญาบัตร <span class="req">*</span></label><input id="degree" type="file" accept="application/pdf,image/jpeg,image/png" required><small class="help">PDF, JPG หรือ PNG</small></div>
+          <div class="filebox"><label class="file-label" for="transcript">สำเนาใบรายงานผลการศึกษา (Transcript) <span class="req">*</span></label><input id="transcript" type="file" accept="application/pdf,image/jpeg,image/png" required><small class="help">PDF, JPG หรือ PNG</small></div>
+          <div class="filebox"><label class="file-label" for="internshipCertificate">หลักฐานใบรับรองการปฏิบัติงานแพทย์เพิ่มพูนทักษะ <span class="req">*</span></label><input id="internshipCertificate" type="file" accept="application/pdf,image/jpeg,image/png" required><small class="help">PDF, JPG หรือ PNG</small></div>
+          <div class="filebox"><label class="file-label" for="ethics">ประกาศนียบัตรอบรมจริยธรรมการวิจัยในคน หรือ GCP</label><input id="ethics" type="file" accept="application/pdf,image/jpeg,image/png"><small class="help">ถ้ามี · ไม่บังคับ</small></div>
+          <div class="filebox"><label class="file-label" for="portfolio">แฟ้มสะสมผลงาน (Portfolio)</label><input id="portfolio" type="file" accept="application/pdf"><small class="help">ถ้ามี · ไม่บังคับ</small></div>
+        </div>
+        
+      </section>
+
+      <section class="step-panel">
+        <h2 class="step-title">5. ตรวจสอบข้อมูลก่อนส่ง</h2>
+        <p class="step-desc">โปรดตรวจสอบข้อมูลและเอกสารแนบให้ถูกต้องก่อนส่งใบสมัคร</p>
+        <label class="hidden" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        <div class="privacy">
+          โปรดอ่าน <a id="privacyLink" href="#" target="_blank" rel="noopener">ประกาศความเป็นส่วนตัวสำหรับผู้สมัคร</a> ก่อนส่งข้อมูล
+          <label class="check"><input id="acknowledgedPrivacy" type="checkbox" required><span>ข้าพเจ้าได้รับทราบประกาศความเป็นส่วนตัวเกี่ยวกับการเก็บ ใช้ และจัดเก็บข้อมูลเพื่อพิจารณาการสมัครงานแล้ว <span class="req">*</span></span></label>
+        </div>
+        <div id="reviewPanel" class="review-panel" hidden>
+          <h3 class="step-title">สรุปข้อมูลและเอกสารที่แนบ</h3>
+          <p class="step-desc">โปรดตรวจสอบรายละเอียดและชื่อไฟล์แนบให้ถูกต้อง</p>
+          <div id="reviewSummary" class="review-grid"></div>
+        </div>
+        <div class="actions">
+          <button id="reviewButton" type="button" class="button">ตรวจสอบข้อมูลก่อนส่ง</button>
+          <button id="submitButton" type="button" class="button" hidden>ยืนยันและส่งใบสมัคร</button>
+        </div>
+      </section>
+      <div id="notice" class="notice" role="status" aria-live="polite"></div>
+    </form>
+    <footer class="footer">สอบถามข้อมูลเพิ่มเติม: jinnapusant.bsb@gmail.com · 02-4198002 หรือ 02-4199191 (ในเวลาราชการ)</footer>
+  </main>
+</div>
+<iframe id="rfApiTransport" name="rfApiTransport" title="ช่องทางส่งข้อมูล" style="display:none"></iframe>
+<script>
+
+const API_URL = 'PASTE_NEW_APPS_SCRIPT_EXEC_URL_HERE';
+
+function callApi(action, payload) {
+  return new Promise((resolve, reject) => {
+    if (!/^https:\/\/script\.google\.com\/macros\/s\/[^/]+\/exec$/.test(API_URL)) {
+      reject(new Error('ยังไม่ได้ตั้งค่า URL ของ Apps Script'));
+      return;
+    }
+    const requestId = (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(36).slice(2));
+    const frame = document.getElementById('rfApiTransport');
+    const timeout = setTimeout(() => { cleanup(); reject(new Error('หมดเวลารอระบบ กรุณาลองใหม่')); }, action === 'submit' ? 180000 : 30000);
+    function cleanup() { clearTimeout(timeout); window.removeEventListener('message', onMessage); }
+    function onMessage(event) {
+      const host = (() => { try { return new URL(event.origin).hostname; } catch (_) { return ''; } })();
+      if (!(host === 'script.google.com' || host.endsWith('.googleusercontent.com'))) return;
+      const message = event.data;
+      if (!message || message.channel !== 'rf-plastic-api' || message.requestId !== requestId) return;
+      cleanup();
+      if (message.ok) resolve(message.result);
+      else reject(new Error(message.message || 'ส่งข้อมูลไม่สำเร็จ'));
+    }
+    window.addEventListener('message', onMessage);
+    const form = document.createElement('form');
+    form.method = 'POST'; form.action = API_URL; form.target = frame.name; form.style.display = 'none';
+    const fields = { action, requestId };
+    if (payload) fields.payload = JSON.stringify(payload);
+    Object.entries(fields).forEach(([name, value]) => {
+      const input = document.createElement('input'); input.type = 'hidden'; input.name = name; input.value = value; form.appendChild(input);
+    });
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(() => form.remove(), 1000);
+  });
+}
+
+const fileFields = ['photo','cv','idCard','medicalLicense','degree','transcript','internshipCertificate','ethics','portfolio'];
+const fileLabels = {photo:'รูปถ่าย 1 นิ้ว',cv:'ประวัติส่วนตัว (CV)',idCard:'สำเนาบัตรประชาชน',medicalLicense:'สำเนาใบอนุญาตประกอบวิชาชีพเวชกรรม',degree:'สำเนาใบปริญญาบัตร',transcript:'สำเนา Transcript',internshipCertificate:'หลักฐานใบรับรองการปฏิบัติงานแพทย์เพิ่มพูนทักษะ',ethics:'ประกาศนียบัตรจริยธรรม/GCP',portfolio:'Portfolio'};
+const form = document.getElementById('applicationForm');
+const submitButton = document.getElementById('submitButton');
+const reviewButton = document.getElementById('reviewButton');
+const reviewPanel = document.getElementById('reviewPanel');
+const notice = document.getElementById('notice');
+let privacyVersion = '';
+const privacyLink = document.getElementById('privacyLink');
+submitButton.disabled = true;
+showNotice('กำลังตรวจสอบการตั้งค่าระบบ…', 'info');
+
+callApi('config').then(config => {
+  if (!config || !config.ready || !config.privacyNoticeUrl || !config.privacyNoticeVersion) {
+    showNotice('ระบบยังตั้งค่าไม่ครบ กรุณาติดต่อผู้ดูแลระบบ', 'error');
+    return;
+  }
+  privacyVersion = config.privacyNoticeVersion;
+  form.dataset.privacyVersion = privacyVersion;
+  privacyLink.href = config.privacyNoticeUrl;
+  submitButton.disabled = false;
+  notice.className = 'notice';
+}).catch(() => {
+  showNotice('เชื่อมต่อระบบไม่สำเร็จ กรุณาตรวจสอบการตั้งค่าเว็บแอป', 'error');
+});
+
+function showNotice(text, kind) { notice.textContent = text; notice.className = 'notice ' + kind; }
+
+function readValue(id) {
+  const element = document.getElementById(id);
+  return element ? (element.value || '').trim() : '';
+}
+
+function renderReview() {
+  const summary = document.getElementById('reviewSummary');
+  summary.replaceChildren();
+  const values = [
+    ['ชื่อ–นามสกุล', readValue('fullName')],
+    ['วันเดือนปีเกิด', readValue('dob')],
+    ['เพศ', readValue('gender')],
+    ['เบอร์โทรศัพท์', readValue('phone')],
+    ['อีเมล', readValue('email')],
+    ['ที่อยู่ปัจจุบัน', readValue('currentAddress')],
+    ['ระดับการศึกษา', readValue('education')],
+    ['มหาวิทยาลัย/สถาบัน', readValue('institution')],
+    ['เลขที่ใบอนุญาตฯ', readValue('licenseNumber')],
+    ['ประสบการณ์วิจัย', readValue('researchExperience') || 'ไม่ได้ระบุ'],
+    ['ทักษะที่เกี่ยวข้อง', readValue('relatedSkills')]
+  ];
+
+  values.forEach(([label, value]) => addReviewItem_(summary, label, value));
+  fileFields.forEach(key => {
+    const input = document.getElementById(key);
+    const filename = input.files[0]?.name || 'ไม่ได้แนบ';
+    addReviewItem_(summary, fileLabels[key], filename);
+  });
+}
+
+function addReviewItem_(container, label, value) {
+  const item = document.createElement('div');
+  item.className = 'review-item';
+  const title = document.createElement('span');
+  title.className = 'review-label';
+  title.textContent = label;
+  const body = document.createElement('span');
+  body.className = 'review-value';
+  body.textContent = value;
+  item.append(title, body);
+  container.appendChild(item);
+}
+
+reviewButton.addEventListener('click', () => {
+  if (!form.reportValidity()) return;
+  renderReview();
+  reviewPanel.hidden = false;
+  reviewButton.hidden = true;
+  submitButton.hidden = false;
+  reviewPanel.scrollIntoView({behavior: 'smooth', block: 'start'});
+});
+
+form.addEventListener('input', () => {
+  if (!reviewPanel.hidden) renderReview();
+});
+form.addEventListener('change', () => {
+  if (!reviewPanel.hidden) renderReview();
+});
+
+function readFile(file) {
+  return new Promise((resolve,reject) => {
+    const reader=new FileReader();
+    reader.onload=() => resolve({
+      name:file.name,
+      mimeType:file.type,
+      base64:String(reader.result).split(',')[1]
+    });
+    reader.onerror=() => reject(new Error('อ่านไฟล์ไม่สำเร็จ: '+file.name));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function submitApplication() {
+  if (!form.reportValidity()) return;
+
+  const data=new FormData(form);
+  const files={};
+  let total=0;
+
+  try {
+    for (const key of fileFields) {
+      const input=document.getElementById(key);
+      const file=input.files[0];
+      if (!file) continue;
+
+      if (file.size>4*1024*1024) {
+        throw new Error('ไฟล์ '+fileLabels[key]+' ต้องมีขนาดไม่เกิน 4 MB');
+      }
+
+      total+=file.size;
+      if (total>16*1024*1024) {
+        throw new Error('ขนาดไฟล์รวมต้องไม่เกิน 16 MB');
+      }
+
+      files[key]=await readFile(file);
+    }
+
+    const payload={
+      fullName:data.get('fullName'),
+      dob:data.get('dob'),
+      gender:data.get('gender'),
+      phone:data.get('phone'),
+      email:data.get('email'),
+      currentAddress:data.get('currentAddress'),
+      education:data.get('education'),
+      institution:data.get('institution'),
+      licenseNumber:data.get('licenseNumber'),
+      researchExperience:data.get('researchExperience'),
+      relatedSkills:data.get('relatedSkills'),
+      acknowledgedPrivacy:document.getElementById('acknowledgedPrivacy').checked,
+      privacyNoticeVersion:privacyVersion,
+      website:data.get('website'),
+      files:files
+    };
+
+    submitButton.disabled=true;
+    submitButton.textContent='กำลังส่งใบสมัคร…';
+    showNotice('กำลังบันทึกข้อมูลและไฟล์ กรุณาอย่าปิดหน้านี้','info');
+
+    callApi('submit', payload).then(result => {
+      showNotice('ส่งใบสมัครเรียบร้อยแล้ว รหัสใบสมัครของคุณคือ ' + result.applicationId, 'success');
+      submitButton.textContent = 'ส่งใบสมัครแล้ว';
+    }).catch(error => {
+      submitButton.disabled = false;
+      submitButton.textContent = 'ยืนยันและส่งใบสมัคร';
+      showNotice(error && error.message ? error.message : 'ส่งใบสมัครไม่สำเร็จ กรุณาลองใหม่อีกครั้ง', 'error');
+    });
+
+  } catch(error) {
+    submitButton.disabled=false;
+    submitButton.textContent='ยืนยันและส่งใบสมัคร';
+    showNotice(error.message || 'กรุณาตรวจสอบไฟล์ที่แนบ','error');
+  }
+}
+
+submitButton.addEventListener('click',submitApplication);
+
+const dobInput=document.getElementById('dob');
+dobInput.max=new Date().toISOString().slice(0,10);
+</script>
+</body>
+</html>
